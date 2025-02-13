@@ -45,7 +45,9 @@ jobs:
 
       - name: Prepare files
         run: |
-          cp -r dist/* ./public/
+          mkdir -p public
+          cp -r dist/* public/
+          cp CNAME public/ || true
           ls -la public/
 
       - name: Deploy to GitHub Pages
