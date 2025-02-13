@@ -24,8 +24,6 @@ const sortedArticles = cryptoNews.articles.sort((a, b) =>
 ---
 <Layout>
   <div class="max-w-5xl mx-auto">
-    <h2 class="text-3xl font-bold mb-4 text-gray-100">最新の仮想通貨ニュース</h2>
-    
     <div class="text-sm text-gray-400 mb-8">
       最終更新: {new Date(cryptoNews.lastUpdated).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}
     </div>
