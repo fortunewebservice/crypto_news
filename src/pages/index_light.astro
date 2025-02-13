@@ -3,64 +3,68 @@
 import Layout from '../layouts/Layout.astro';
 import cryptoNews from '../data/crypto_news.json';
 
+// カテゴリーの表示設定
 const categoryConfig = {
   'trending_coin': {
-    label: '注目',
-    className: 'bg-red-900/50 text-red-200'
+    label: '注目銘柄',
+    className: 'bg-red-100 text-red-800'
   },
   'market_analysis': {
     label: '市場動向',
-    className: 'bg-neutral-800 text-gray-200'
+    className: 'bg-gray-100 text-gray-700'
   },
   'project_info': {
     label: '開発情報',
-    className: 'bg-neutral-800 text-gray-200'
+    className: 'bg-gray-100 text-gray-700'
   }
 };
 
+// 全記事を日付順にソート
 const sortedArticles = cryptoNews.articles.sort((a, b) => 
   new Date(b.published).getTime() - new Date(a.published).getTime()
 );
 ---
+
 <Layout>
   <div class="max-w-5xl mx-auto">
-    <h2 class="text-3xl font-bold mb-4 text-gray-100">最新の仮想通貨ニュース</h2>
+    <h1 class="text-3xl font-bold mb-4">最新の仮想通貨ニュース</h1>
     
-    <div class="text-sm text-gray-400 mb-8">
+    <div class="text-sm text-gray-500 mb-8">
       最終更新: {new Date(cryptoNews.lastUpdated).toLocaleString('ja-JP')}
     </div>
 
+    <!-- ニュース一覧 -->
     <div class="space-y-6">
       {sortedArticles.map(article => {
         const category = categoryConfig[article.article_category];
         return (
-          <article class="bg-neutral-800 rounded-lg shadow-xl p-6 border border-neutral-700">
+          <article class="bg-white rounded-lg shadow-md p-6">
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 rounded-full text-sm bg-blue-900/50 text-blue-200">
-                {article.source}
-              </span>
               {category && (
                 <span class={`px-3 py-1 rounded-full text-sm ${category.className}`}>
                   {category.label}
                 </span>
               )}
+              <span class="px-3 py-1 rounded-full text-sm bg-blue-50 text-blue-700">
+                {article.source}
+              </span>
             </div>
             
             <h2 class="text-xl font-bold mb-3">
               <a href={article.url} 
                  target="_blank" 
                  rel="noopener noreferrer"
-                 class="text-gray-100 hover:text-blue-400 transition-colors">
+                 class="hover:text-blue-600">
                 {article.title}
               </a>
             </h2>
             
-            <p class="text-gray-300 mb-4">
+            <p class="text-gray-600 mb-4">
               {article.content_summary}
             </p>
             
             <div class="flex justify-between items-center">
-              <time datetime={article.published} class="text-sm text-gray-400">
+              <time datetime={article.published} class="text-sm text-gray-500">
                 {new Date(article.published).toLocaleString('ja-JP', {
                   month: '2-digit',
                   day: '2-digit',
@@ -72,7 +76,7 @@ const sortedArticles = cryptoNews.articles.sort((a, b) =>
                 href={article.url} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="text-blue-400 hover:text-blue-300 text-sm flex items-center transition-colors"
+                class="text-blue-600 hover:text-blue-800 text-sm flex items-center"
               >
                 続きを読む →
               </a>

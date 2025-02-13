@@ -10,18 +10,17 @@ import '/src/styles/global.css'
     <title>Crypto News</title>
     <link href="/favicon.svg" rel="icon" />
   </head>
-  <body class="bg-neutral-900">
-    <header class="bg-neutral-800 shadow-lg fixed w-full top-0 z-50 border-b border-neutral-700">
+  <body class="bg-gray-50">
+    <header class="bg-white shadow-sm fixed w-full top-0 z-50">
       <div class="max-w-5xl mx-auto px-4">
         <div class="h-16 flex items-center">
-          <h1>
-            <a href="/" class="text-xl font-semibold text-gray-100 hover:text-blue-400">
-              Crypto News
-            </a>
-          </h1>
+          <a href="/" class="text-xl font-semibold">
+            Crypto News
+          </a>
         </div>
       </div>
     </header>
+
     <main class="container mx-auto px-4 pt-20 pb-12">
       <slot />
     </main>

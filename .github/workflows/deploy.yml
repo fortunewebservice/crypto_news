@@ -1,10 +1,12 @@
-# .github/workflows/deploy.yml
 name: Deploy Crypto News Site
 
 on:
+  push:
+    branches:
+      - main # またはmasterブランチの場合はmaster
   schedule:
-    - cron: "0 0 * * *" # 毎日UTC 0:00 (JST 9:00)に実行
-  workflow_dispatch: # 手動実行も可能
+    - cron: "0 */4 * * *" # 4時間ごとに実行
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -43,3 +45,15 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Crypto News Deploy Failed',
+              body: 'Failed at: ${{ github.event.head_commit.timestamp }}\nWorkflow: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+            })
