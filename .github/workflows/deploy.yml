@@ -51,12 +51,27 @@ jobs:
           cp CNAME public/ || true
           ls -la public/
 
+      - name: Check directory before deploy
+        run: |
+          echo "=== Current directory ==="
+          pwd
+          echo "=== Content of current directory ==="
+          ls -la
+          echo "=== Content of public directory ==="
+          ls -la public/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: public
           force_orphan: true
+
+      - name: Check directory after deploy
+        run: |
+          echo "=== Directory after deploy ==="
+          ls -la
+          ls -la public/ || echo "public directory not found"
 
       - name: Notify on failure
         if: failure()
