@@ -45,7 +45,8 @@ jobs:
 
       - name: Prepare files
         run: |
-          mkdir -p public
+          rm -rf public
+          mkdir public
           cp -r dist/* public/
           cp CNAME public/ || true
           ls -la public/
