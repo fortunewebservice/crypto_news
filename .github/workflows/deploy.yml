@@ -10,8 +10,8 @@ on:
   workflow_dispatch: # 手動実行も可能
 
 # 権限設定を追加
-# permissions:
-#   contents: write
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
