@@ -1,12 +1,13 @@
+# .github/workflows/deploy.yml
 name: Deploy Crypto News Site
 
 on:
   push:
     branches:
-      - main # またはmasterブランチの場合はmaster
+      - main
   schedule:
     - cron: "0 */4 * * *" # 4時間ごとに実行
-  workflow_dispatch:
+  workflow_dispatch: # 手動実行も可能
 
 jobs:
   build-and-deploy:
