@@ -29,15 +29,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      # Step 2: Set up Cache & Install Python dependencies (if any)
-      - name: Cache Python dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: python-pip-cache-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            python-pip-cache-
-
+      # Step 2: Install Python dependencies (if any)
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -47,15 +39,7 @@ jobs:
       - name: Run crypto news script
         run: python crypto_news.py
 
-      # Step 4: Set up Node.js and cache dependencies
-      - name: Cache Node.js dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: node-cache-Linux-x64-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            node-cache-Linux-x64-npm-
-
+      # Step 4: Set up Node.js
       - name: Install, build, and upload your site using withastro/action
         uses: withastro/action@v3
         with:
