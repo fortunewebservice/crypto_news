@@ -10,8 +10,8 @@ on:
   workflow_dispatch: # 手動実行も可能
 
 # 権限設定を追加
-permissions:
-  contents: write
+# permissions:
+#   contents: write
 
 jobs:
   build-and-deploy:
@@ -44,6 +44,7 @@ jobs:
 
       - name: Build site
         run: npm run build
+        ls -la dist  # ビルド結果を確認
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
