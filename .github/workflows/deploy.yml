@@ -44,9 +44,9 @@ jobs:
         uses: withastro/action@v3
         with:
           # Optional settings for path, node-version, and package-manager
-          # path: .  # Root location of your Astro project if it's different
-          # node-version: 20  # Version of Node to use (default is 20)
-          # package-manager: pnpm@latest  # Automatically detects based on lockfile
+          path: . # Root location of your Astro project if it's different
+          node-version: 20 # Version of Node to use (default is 20)
+          package-manager: npm # Automatically detects based on lockfile
 
   deploy:
     name: Deploy to GitHub Pages
