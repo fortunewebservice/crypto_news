@@ -9,6 +9,10 @@ on:
     - cron: "0 */4 * * *" # 4時間ごとに実行
   workflow_dispatch: # 手動実行も可能
 
+# 権限設定を追加
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
