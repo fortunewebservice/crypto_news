@@ -32,38 +32,48 @@ const sortedArticles = cryptoNews.articles.sort((a, b) =>
       {sortedArticles.map(article => {
         const category = categoryConfig[article.article_category];
         return (
-          <article class="bg-neutral-800 rounded-lg shadow-xl p-6 border border-neutral-700">
+        <article class="bg-neutral-800 rounded-lg shadow-xl p-6 border border-neutral-700">
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-3 py-1 rounded-full text-sm bg-blue-900/50 text-blue-200">
+              {article.source}
+            </span>
+            {category && (
+              <span class={`px-3 py-1 rounded-full text-sm ${category.className}`}>
+                {category.label}
+              </span>
+            )}
+          </div>
+          
+          <h2 class="text-xl font-bold mb-3">
+            <a href={article.url} 
+              class="text-gray-100 hover:text-blue-400 transition-colors">
+              {article.title}
+            </a>
+          </h2>
+          
+          <p class="text-gray-300 mb-4">
+            {article.content_summary}
+          </p>
+          
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            <time datetime={article.published} class="text-sm text-gray-400">
+              {new Date(article.published).toLocaleString('ja-JP', {
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+            </time>
 
-            <h2 class="text-xl font-bold mb-3">
-              <a href={article.url} 
-                class="text-gray-100 hover:text-blue-400 transition-colors">
-                {article.title}
-              </a>
-            </h2>
-            
-            <p class="text-gray-300 mb-4">
-              {article.content_summary}
-            </p>
-            
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-              <time datetime={article.published} class="text-sm text-gray-400">
-                {new Date(article.published).toLocaleString('ja-JP', {
-                  month: '2-digit',
-                  day: '2-digit',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}
-              </time>
-
-              <a 
-                href={article.url}
-                class="w-full sm:w-auto py-3 sm:py-2 px-4 bg-neutral-700 hover:bg-neutral-600 
-                      text-center rounded-lg text-gray-100 transition-colors active:bg-neutral-500"
-              >
-                続きを読む →
-              </a>
-            </div>
-          </article>
+            <a 
+              href={article.url}
+              class="w-full sm:w-auto py-3 sm:py-2 px-4 bg-neutral-700 hover:bg-neutral-600 
+                    text-center rounded-lg text-gray-100 transition-colors active:bg-neutral-500"
+            >
+              続きを読む →
+            </a>
+          </div>
+        </article>
         );
       })}
     </div>
